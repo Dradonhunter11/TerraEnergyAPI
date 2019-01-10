@@ -1,0 +1,5 @@
+Terra Energy API is a port of Redstone Flux API into terraria. 
+
+Currently experimental, but can be used safely!
+
+Credit to the COFH Team for making Redstone Flux!

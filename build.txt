@@ -1,0 +1,5 @@
+author = dradonhunter11
+version = 0.1
+displayName = Terra Energy API
+includePDB = true
+languageVersion = 6
