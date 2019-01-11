@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,7 +10,7 @@ using Terraria.ModLoader.IO;
 
 namespace TerraEnergyLibrary.API
 {
-    abstract class ItemEnergyContainer : ModItem, EnergyItemContainer, BetterModItem
+    abstract class ItemEnergyContainer : ModItem, EnergyItemContainer, BasicDataStorage
     {
         public override bool CloneNewInstances
         {
@@ -28,12 +29,12 @@ namespace TerraEnergyLibrary.API
             get => _capacity;
             set => _capacity = value;
         }
-        public TagCompound tag { get; internal set; }
+        public TagCompound tag { get => tagCompound; internal set => tagCompound = value; }
 
         public sealed override TagCompound Save()
         {
-            TagCompound tag = new TagCompound();
-            NewSave(tag);
+            TagCompound saveTag = new TagCompound();
+            NewSave(saveTag);
             tag[ENERGY] = tagCompound.GetAsLong(ENERGY);
             return tagCompound;
         }
@@ -56,7 +57,7 @@ namespace TerraEnergyLibrary.API
             this.tag = tag;
         }
 
-        public long ReceiveEnergy(BetterModItem container, long maxReceive)
+        public long ReceiveEnergy(BasicDataStorage container, long maxReceive)
         {
             if (!container.HasTagCompound() || !container.tag.ContainsKey(ENERGY))
             {
@@ -72,7 +73,7 @@ namespace TerraEnergyLibrary.API
             return energyReceived;
         }
 
-        public long TransferEnergy(BetterModItem container, long maxTransfer)
+        public long TransferEnergy(BasicDataStorage container, long maxTransfer)
         {
             if (container.tag == null || !container.tag.ContainsKey(ENERGY))
             {
@@ -87,7 +88,7 @@ namespace TerraEnergyLibrary.API
             return energyExtracted;
         }
 
-        public long GetStoredEnergy(BetterModItem container)
+        public long GetStoredEnergy(BasicDataStorage container)
         {
             if (container.tag == null || !container.tag.ContainsKey(ENERGY))
             {
@@ -97,9 +98,21 @@ namespace TerraEnergyLibrary.API
             return Math.Min(container.tag.GetAsLong(ENERGY), GetMaximumStorage(container));
         }
 
-        public long GetMaximumStorage(BetterModItem container)
+        public long GetMaximumStorage(BasicDataStorage container)
         {
             return Capacity;
+        }
+
+        public sealed override void NetSend(BinaryWriter writer)
+        {
+            var stream = new MemoryStream();
+            TagIO.ToStream(tag, stream);
+            writer.Write(stream.ToArray());
+        }
+
+        public sealed override void NetRecieve(BinaryReader reader)
+        {
+            tag = TagIO.Read(reader);
         }
 
         public virtual void NewSave(TagCompound tag)

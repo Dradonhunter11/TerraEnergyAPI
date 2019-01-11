@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,10 +11,12 @@ using Terraria.ModLoader.IO;
 
 namespace TerraEnergyLibrary.API
 {
-    abstract class TileEntityEnergyHandler : ModTileEntity, EnergyProvider, EnergyReceiver
+    abstract class TileEntityEnergyHandler : ModTileEntity, EnergyProvider, EnergyReceiver, BasicDataStorage
     {
 
         protected EnergyContainer _energyContainer = new EnergyContainer(50000);
+
+        public TagCompound tag { get; internal set; }
 
         public sealed override TagCompound Save()
         {
@@ -58,6 +61,18 @@ namespace TerraEnergyLibrary.API
             return _energyContainer.TransfertEnergy(maxTransfer);
         }
 
+        public sealed override void NetSend(BinaryWriter writer, bool lightSend)
+        {
+            var stream = new MemoryStream();
+            TagIO.ToStream(tag, stream);
+            writer.Write(stream.ToArray());
+        }
+
+        public sealed override void NetReceive(BinaryReader reader, bool lightReceive)
+        {
+            tag = TagIO.Read(reader);
+        }
+
         public virtual void NewSave(TagCompound tag)
         {
 
@@ -66,6 +81,17 @@ namespace TerraEnergyLibrary.API
         public virtual void NewLoad(TagCompound tag)
         {
 
+        }
+
+        
+        public bool HasTagCompound()
+        {
+            return tag != null;
+        }
+
+        public void SetTagCompound(TagCompound tag)
+        {
+            this.tag = tag;
         }
     }
 }

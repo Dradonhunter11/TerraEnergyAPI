@@ -10,9 +10,9 @@ namespace TerraEnergyLibrary.API.Interface
 
     public interface EnergyItemContainer
     {
-        long ReceiveEnergy(BetterModItem betterModItem, long maxReceive);
-        long TransferEnergy(BetterModItem container, long maxTransfer);
-        long GetStoredEnergy(BetterModItem container);
-        long GetMaximumStorage(BetterModItem container);
+        long ReceiveEnergy(BasicDataStorage betterModItem, long maxReceive);
+        long TransferEnergy(BasicDataStorage container, long maxTransfer);
+        long GetStoredEnergy(BasicDataStorage container);
+        long GetMaximumStorage(BasicDataStorage container);
     }
 }

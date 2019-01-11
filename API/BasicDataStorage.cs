@@ -7,7 +7,7 @@ using Terraria.ModLoader.IO;
 
 namespace TerraEnergyLibrary.API
 {
-    public interface BetterModItem
+    public interface BasicDataStorage
     {
         TagCompound tag { get; }
         bool HasTagCompound();

@@ -33,7 +33,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="API\BetterModItem.cs" />
+    <Compile Include="API\BasicDataStorage.cs" />
     <Compile Include="API\EnergyContainer.cs" />
     <Compile Include="API\Interface\EnergyConnection.cs" />
     <Compile Include="API\Interface\EnergyHandler.cs" />
