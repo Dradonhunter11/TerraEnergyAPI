@@ -30,6 +30,22 @@ namespace TerraEnergyLibrary.API
         }
         public TagCompound tag { get; internal set; }
 
+        public sealed override TagCompound Save()
+        {
+            TagCompound tag = new TagCompound();
+            NewSave(tag);
+            tag[ENERGY] = tagCompound.GetAsLong(ENERGY);
+            return tagCompound;
+        }
+
+
+
+        public sealed override void Load(TagCompound tag)
+        {
+            tagCompound[ENERGY] = tag.GetAsLong(ENERGY);
+            NewLoad(tag);
+        }
+
         public bool HasTagCompound()
         {
             return tag != null;
@@ -84,6 +100,16 @@ namespace TerraEnergyLibrary.API
         public long GetMaximumStorage(BetterModItem container)
         {
             return Capacity;
+        }
+
+        public virtual void NewSave(TagCompound tag)
+        {
+
+        }
+
+        public virtual void NewLoad(TagCompound tag)
+        {
+
         }
     }
 }

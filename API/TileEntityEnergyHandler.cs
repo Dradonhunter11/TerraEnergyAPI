@@ -19,7 +19,8 @@ namespace TerraEnergyLibrary.API
         {
             TagCompound tag = new TagCompound();
             _energyContainer.Save(tag);
-            return base.Save();
+            NewSave(tag);
+            return tag;
         }
 
 
@@ -27,6 +28,7 @@ namespace TerraEnergyLibrary.API
         public sealed override void Load(TagCompound tag)
         {
             _energyContainer.Load(tag);
+            NewLoad(tag);
         }
 
         

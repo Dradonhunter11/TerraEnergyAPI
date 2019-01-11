@@ -55,6 +55,7 @@ namespace TerraEnergyLibrary.API
             }
         }
 
+
         public long GetCurrentEnergy()
         {
             return _currentEnergy;
@@ -73,7 +74,6 @@ namespace TerraEnergyLibrary.API
             {
                 _currentEnergy = 0;
             }
-
             tag.Add("currentEnergy", _currentEnergy);
         }
 
