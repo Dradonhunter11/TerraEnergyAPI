@@ -10,7 +10,7 @@ using Terraria.ModLoader.IO;
 
 namespace TerraEnergyLibrary.API
 {
-    abstract class ItemEnergyContainer : ModItem, EnergyItemContainer, BasicDataStorage
+    public abstract class ItemEnergyContainer : ModItem, EnergyItemContainer, BasicDataStorage
     {
         public override bool CloneNewInstances
         {
@@ -105,14 +105,17 @@ namespace TerraEnergyLibrary.API
 
         public sealed override void NetSend(BinaryWriter writer)
         {
-            var stream = new MemoryStream();
-            TagIO.ToStream(tag, stream);
+            MemoryStream stream = new MemoryStream(65536);
+            TagIO.ToStream(tag, stream, true);
+            writer.Write((ushort)stream.Length);
             writer.Write(stream.ToArray());
         }
 
         public sealed override void NetRecieve(BinaryReader reader)
         {
-            tag = TagIO.Read(reader);
+            int len = reader.ReadUInt16();
+            MemoryStream stream = new MemoryStream(reader.ReadBytes(len));
+            tag = TagIO.FromStream(stream, true);
         }
 
         public virtual void NewSave(TagCompound tag)
