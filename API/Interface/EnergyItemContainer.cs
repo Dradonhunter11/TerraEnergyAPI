@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Terraria.ModLoader;
 
-namespace TerraEnergyLibrary.API.Interface
+namespace TerraEnergyAPI.API.Interface
 {
 
     public interface EnergyItemContainer

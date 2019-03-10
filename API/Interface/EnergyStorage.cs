@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TerraEnergyLibrary.API.Interface
+namespace TerraEnergyAPI.API.Interface
 {
     public interface EnergyStorage
     {

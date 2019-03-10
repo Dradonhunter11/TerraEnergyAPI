@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Terraria;
 
-namespace TerraEnergyLibrary.API.Interface
+namespace TerraEnergyAPI.API.Interface
 {
     public interface EnergyConnection
     {

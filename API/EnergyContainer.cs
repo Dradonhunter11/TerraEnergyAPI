@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TerraEnergyLibrary.API.Interface;
+using TerraEnergyAPI.API.Interface;
 using Terraria.ModLoader.IO;
 
-namespace TerraEnergyLibrary.API
+namespace TerraEnergyAPI.API
 {
     public class EnergyContainer : EnergyStorage
     {

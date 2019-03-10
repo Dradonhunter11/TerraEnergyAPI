@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Terraria.ModLoader.IO;
 
-namespace TerraEnergyLibrary.API
+namespace TerraEnergyAPI.API
 {
     public interface BasicDataStorage
     {
