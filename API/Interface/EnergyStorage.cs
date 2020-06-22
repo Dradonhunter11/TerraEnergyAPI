@@ -9,7 +9,7 @@ namespace TerraEnergyAPI.API.Interface
     public interface EnergyStorage
     {
         long ReceiveEnergy(long maxAmountToReceive);
-        long TransfertEnergy(long maxAmountToTransfer);
+        long TransferEnergy(long maxAmountToTransfer);
         long MaxEnergy { get; set; }
         long GetCurrentEnergy();
     }

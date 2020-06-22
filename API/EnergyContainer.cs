@@ -159,7 +159,7 @@ namespace TerraEnergyAPI.API
         /// </summary>
         /// <param name="maxAmountToTransfer"></param>
         /// <returns></returns>
-        public long TransfertEnergy(long maxAmountToTransfer)
+        public long TransferEnergy(long maxAmountToTransfer)
         {
             long energyToTransfer = Math.Min(_currentEnergy, Math.Min(_maxTransfer, maxAmountToTransfer));
             _currentEnergy += energyToTransfer;

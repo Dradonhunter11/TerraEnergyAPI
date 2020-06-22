@@ -39,7 +39,7 @@ namespace TerraEnergyAPI.API
 
             TagCompound tag = new TagCompound();
             _energyContainer.Save(tag);
-            NewSave(tag);            
+            NewSave(tag);
             return tag;
         }
 
@@ -66,12 +66,12 @@ namespace TerraEnergyAPI.API
 
         public long ReceiveEnergy(Tile tile, long maxTransfer)
         {
-            return _energyContainer.ReceiveEnergy(maxTransfer); ;
+            return _energyContainer.ReceiveEnergy(maxTransfer);
         }
 
         public long TransferEnergy(Tile tile, long maxTransfer)
         {
-            return _energyContainer.TransfertEnergy(maxTransfer);
+            return _energyContainer.TransferEnergy(maxTransfer);
         }
 
         /// <summary>
